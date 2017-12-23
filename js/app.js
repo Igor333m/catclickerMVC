@@ -1,5 +1,5 @@
 $(function(){
-
+	// Model with all data
 	let model = [
 			{
 				name: "Miki",
@@ -35,21 +35,33 @@ $(function(){
 
 	let octopus = {
 		init: function() {
-			view.init();
+			viewList.init();
 		},
 
-		allCatsName: function() {
-			let cats = model.map( () => {
-				return model.name;
+		allCats: function() {
+			let cat = model.map( (cat, index, model) => {
+				return cat;
+			});
+			console.log(cat);
+			return cat;
+		}
+	};
+
+	// First view
+	let viewList = {
+		// Creates list of all cats
+		init: function() {
+			const listOfCats = document.querySelector(".list");
+			octopus.allCats().forEach( cat => {
+				listOfCats.insertAdjacentHTML("beforeend", `<li>${cat.name}</li>`);
 			});
 		}
 	};
 
-	let view = {
-		init: function() {
+	//
+	let viewCat = {
 
-		}
-	};
+	}; 
 
 	octopus.init();
 });
