@@ -32,7 +32,8 @@ $(function(){
 				numClicks: 0
 			}
 		];
-
+//**********************************************************************//
+	// Lary the octopus is the controller
 	let octopus = {
 		init: function() {
 			viewList.init();
@@ -40,7 +41,7 @@ $(function(){
 			octopus.catClick();
 			octopus.catClickCounter();
 		},
-
+		// maps thru all cats
 		allCats: function() {
 			let cat = model.map( (cat, index, model) => {
 				return cat;
@@ -48,8 +49,9 @@ $(function(){
 			return cat;
 		},
 
+		// Number of selected cat in the model
 		currentCat: 0,
-
+		// Tell the view which cat to display after the click on li 
 		catClick: function() {
 			for(let i = 0; i < model.length; i++) {
 				$("li").click(function() {
@@ -63,7 +65,7 @@ $(function(){
 				});
 			}
 		},
-
+		// Update the counter for each cat and tells the view to display
 		catClickCounter: function() {
 			$(".container").on("click", "img", function() {
 				console.log(octopus.currentCat);
@@ -72,8 +74,7 @@ $(function(){
 			});
 		}
 	};
-
-	// First view
+//**********************************************************************//
 	let viewList = {
 		// Creates list of all cats
 		init: function() {
@@ -83,8 +84,8 @@ $(function(){
 			});
 		}
 	};
-
-	//
+//**********************************************************************//
+	// display cat window
 	let viewCat = {
 		// Create cat window
 		init: function() {
@@ -101,6 +102,7 @@ $(function(){
 		showCat: function(cat) {
 			// Clear .container
 			document.querySelector(".container").innerHTML = "";
+			// Add new cat to the container
 			containerHtml = `
 				<article>
 					<h1>${cat.name}</h1>
@@ -110,7 +112,7 @@ $(function(){
 			`;
 			document.querySelector(".container").insertAdjacentHTML("afterbegin", containerHtml);
 		},
-
+		// Show number of clicks for particular cat
 		catClicksHTML: function(clicks) {
 			document.querySelector("h2 span").textContent = clicks;
 		}
