@@ -1,36 +1,39 @@
 // Model with all data
-let model = [
-		{
-			name: "Miki",
-			img: "cat.jpg",
-			numClicks: 0
-		},
-		{
-			name: "Donald",
-			img: "cat2.jpg",
-			numClicks: 0
-		},
-		{
-			name: "Ana",
-			img: "cat3.jpg",
-			numClicks: 0
-		},
-		{
-			name: "Arthur",
-			img: "cat4.jpg",
-			numClicks: 0
-		},
-		{
-			name: "Aragorn",
-			img: "cat5.jpg",
-			numClicks: 0
-		},
-		{
-			name: "Lilly",
-			img: "cat6.jpg",
-			numClicks: 0
-		}
-	];
+let model = {
+	currentCat: 0,
+	cats:[ 
+	{
+		name: "Miki",
+		img: "cat.jpg",
+		numClicks: 0
+	},
+	{
+		name: "Donald",
+		img: "cat2.jpg",
+		numClicks: 0
+	},
+	{
+		name: "Ana",
+		img: "cat3.jpg",
+		numClicks: 0
+	},
+	{
+		name: "Arthur",
+		img: "cat4.jpg",
+		numClicks: 0
+	},
+	{
+		name: "Aragorn",
+		img: "cat5.jpg",
+		numClicks: 0
+	},
+	{
+		name: "Lilly",
+		img: "cat6.jpg",
+		numClicks: 0
+	}
+	]
+};
 //**********************************************************************//
 // Lary the octopus is the controller
 let octopus = {
@@ -40,9 +43,9 @@ let octopus = {
 		this.catClick();
 		this.catClickCounter();
 	},
-	// maps thru all cats
+	// maps through all cats
 	allCats: function() {
-		let cat = model.map( (cat, index, model) => {
+		let cat = model.cats.map( (cat, index, model) => {
 			return cat;
 		});
 		return cat;
@@ -52,14 +55,14 @@ let octopus = {
 	currentCat: 0,
 	// Tell the view which cat to display after the click on li 
 	catClick: function() {
-		for(let i = 0; i < model.length; i++) {
+		for(let i = 0; i < model.cats.length; i++) {
 			$("li").click(function() {
 				console.log($(this).text());
-				if( $(this).text() === model[i].name ) {
+				if( $(this).text() === model.cats[i].name ) {
 					// Set currentCat
 					octopus.currentCat = i;
 					// return clicked cat object
-					return viewCat.showCat(model[i]);
+					return viewCat.showCat(model.cats[i]);
 				}
 			});
 		}
@@ -68,8 +71,8 @@ let octopus = {
 	catClickCounter: function() {
 		$(".container").on("click", "img", function() {
 			console.log(octopus.currentCat);
-			model[octopus.currentCat].numClicks += 1;
-			viewCat.catClicksHTML(model[octopus.currentCat].numClicks);
+			model.cats[octopus.currentCat].numClicks += 1;
+			viewCat.catClicksHTML(model.cats[octopus.currentCat].numClicks);
 		});
 	}
 };
@@ -90,9 +93,9 @@ let viewCat = {
 	init: function() {
 		containerHtml = `
 			<article>
-				<h1>${model[0].name}</h1>
-				<img src="img/${model[0].img}" alt="${model[0].name} the cat" data-cat="${model[0].name}">
-	        	<h2>Number of clicks <span>${model[0].numClicks}</span></h2>
+				<h1>${model.cats[0].name}</h1>
+				<img src="img/${model.cats[0].img}" alt="${model.cats[0].name} the cat" data-cat="${model.cats[0].name}">
+	        	<h2>Number of clicks <span>${model.cats[0].numClicks}</span></h2>
 	        </article>
 		`;
 		document.querySelector(".container").insertAdjacentHTML("afterbegin", containerHtml);
