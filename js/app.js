@@ -45,10 +45,7 @@ let octopus = {
 	},
 	// maps through all cats
 	allCats: function() {
-		let cat = model.cats.map( (cat, index, model) => {
-			return cat;
-		});
-		return cat;
+		return model.cats;
 	},
 
 	// Number of selected cat in the model
