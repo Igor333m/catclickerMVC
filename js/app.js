@@ -1,39 +1,41 @@
 // Model with all data
 let model = {
+	// Number of selected cat in the model
 	currentCat: 0,
 	cats:[ 
-	{
-		name: "Miki",
-		img: "cat.jpg",
-		numClicks: 0
-	},
-	{
-		name: "Donald",
-		img: "cat2.jpg",
-		numClicks: 0
-	},
-	{
-		name: "Ana",
-		img: "cat3.jpg",
-		numClicks: 0
-	},
-	{
-		name: "Arthur",
-		img: "cat4.jpg",
-		numClicks: 0
-	},
-	{
-		name: "Aragorn",
-		img: "cat5.jpg",
-		numClicks: 0
-	},
-	{
-		name: "Lilly",
-		img: "cat6.jpg",
-		numClicks: 0
-	}
+		{
+			name: "Miki",
+			img: "cat.jpg",
+			numClicks: 0
+		},
+		{
+			name: "Donald",
+			img: "cat2.jpg",
+			numClicks: 0
+		},
+		{
+			name: "Ana",
+			img: "cat3.jpg",
+			numClicks: 0
+		},
+		{
+			name: "Arthur",
+			img: "cat4.jpg",
+			numClicks: 0
+		},
+		{
+			name: "Aragorn",
+			img: "cat5.jpg",
+			numClicks: 0
+		},
+		{
+			name: "Lilly",
+			img: "cat6.jpg",
+			numClicks: 0
+		}
 	]
 };
+
 //**********************************************************************//
 // Lary the octopus is the controller
 let octopus = {
@@ -47,9 +49,6 @@ let octopus = {
 	allCats: function() {
 		return model.cats;
 	},
-
-	// Number of selected cat in the model
-	currentCat: 0,
 	// Tell the view which cat to display after the click on li 
 	catClick: function() {
 		for(let i = 0; i < model.cats.length; i++) {
@@ -57,7 +56,7 @@ let octopus = {
 				console.log($(this).text());
 				if( $(this).text() === model.cats[i].name ) {
 					// Set currentCat
-					octopus.currentCat = i;
+					model.currentCat = i;
 					// return clicked cat object
 					return viewCat.showCat(model.cats[i]);
 				}
@@ -67,12 +66,12 @@ let octopus = {
 	// Update the counter for each cat and tells the view to display
 	catClickCounter: function() {
 		$(".container").on("click", "img", function() {
-			console.log(octopus.currentCat);
-			model.cats[octopus.currentCat].numClicks += 1;
-			viewCat.catClicksHTML(model.cats[octopus.currentCat].numClicks);
+			model.cats[model.currentCat].numClicks += 1;
+			viewCat.catClicksHTML(model.cats[model.currentCat].numClicks);
 		});
 	}
 };
+
 //**********************************************************************//
 let viewList = {
 	// Creates list of all cats
